@@ -29,6 +29,8 @@ To avoid this, Null-AMSI uses reflection and use native functions, with this we 
 
 - *Multi-Architecture*: Works for both 32-bit and 64-bit PowerShell, to run in any environment, for this it checks the length in bytes of the IntPtr data type.
 
+- *Evasion in memory modification*: By modifying the memory address permissions of AMSI and **EtwEventWrite** providers using the **VirtualProtect** function, **PAGE_EXECUTE_WRITECOPY** protection is employed, an uncommon configuration that favors evasion of security mechanisms. This protection contributes to the patch's effectiveness by allowing memory modifications to be made in a way that is more difficult for security tools to detect.
+
 ### ETW Patching
 ETW (Event Tracing for Windows) is Microsoft's real-time event tracing and collection infrastructure for logging, monitoring and analyzing operating system and application events in Windows at the Kernel level. In the context of computer security and threat detection, ETW is a very valuable tool for Antivirus (AV) and Endpoint Detection and Response (EDR) solutions, as it provides detailed information about system activities that may be indicative of malicious behavior. Null-AMSI patches EtwEventWrite (optionally) by returning the execution flow to the next instruction.
 
@@ -54,7 +56,7 @@ Invoke-NullAMSI -v
 ```
 
 ### Usage example
-1. Run Null-AMSI tool added verbose flags and ETW patch
+1. Run the Null-AMSI tool, I added verbose flags and ETW patch (optional).
 ![image](https://github.com/user-attachments/assets/6f5ee3f1-0c93-4d23-9388-57135abd6506)
 
 2. Now we can run Mimikatz with amsi disabled, I used an obfuscated version of Mimikatz ([Mimikatz-Obfuscated](https://raw.githubusercontent.com/BlackShell256/Null-AMSI/refs/heads/main/Invoke-Mimikatz.ps1)) with zlib and base64 to avoid the http detection of my Eset Premium AV. 
