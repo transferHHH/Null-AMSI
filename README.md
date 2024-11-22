@@ -59,12 +59,18 @@ Invoke-NullAMSI -v
 1. Run the Null-AMSI tool, I added verbose flags and ETW patch (optional).
 ![image](https://github.com/user-attachments/assets/6f5ee3f1-0c93-4d23-9388-57135abd6506)
 
-2. Now we can run Mimikatz with amsi disabled, I used an obfuscated version of Mimikatz ([Mimikatz-Obfuscated](https://raw.githubusercontent.com/BlackShell256/Null-AMSI/refs/heads/main/Invoke-Mimikatz.ps1)) with zlib and base64 to avoid the http detection of my Eset Premium AV. 
+2. Now we can run Mimikatz with amsi disabled, I used an obfuscated version of Mimikatz ([Mimikatz-Obfuscated](https://raw.githubusercontent.com/BlackShell256/Null-AMSI/refs/heads/main/Invoke-Mimikatz.ps1)) with zlib and base64 to avoid the http detection of my Eset Premium AV.
+To obfuscate use: https://github.com/BlackShell256/Null-AMSI/blob/main/NullObfuscate.py (python3 NullObfuscate.py -f Invoke-Mimikatz.ps1 -o Obfuscated-Mimikatz.ps1)
 ![image](https://github.com/user-attachments/assets/caed0aae-ab4e-4d24-8761-52a03fd1a31f)
 
 ### Poc Evasion
 [Full Video](https://www.linkedin.com/posts/anibal-5a3870278_evasion-bypass-amsi-activity-7264104326703329280-S8Y9?utm_source=share&utm_medium=member_desktop)
 ![image](https://github.com/user-attachments/assets/6c832166-92b5-446a-893c-273249cd68a8)
+
+### Poc Evasion 2
+[Full Video](https://www.linkedin.com/posts/anibal-5a3870278_evasion-bypass-amsi-activity-7264104326703329280-S8Y9?utm_source=share&utm_medium=member_desktop)
+![image](https://github.com/user-attachments/assets/c40466b1-6a05-4941-9530-0520723b1fa3)
+
 
 ## Credit
 
